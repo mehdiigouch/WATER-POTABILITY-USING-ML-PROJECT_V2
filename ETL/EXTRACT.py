@@ -2,9 +2,8 @@
 # creating class  Extraction , to extarct data from the source and pass it to the next step of 
 # the pipeline 
 
-
 from logging import log
-from pathlib import path
+from pathlib import Path
 import pandas as pd
 
 
@@ -21,7 +20,7 @@ class Extraction:
         """
         try:
             # Check if the source path exists
-            if not path.Path(self.source_path).exists():
+            if not Path.Path(self.source_path).exists():
                 log.error(f"Source path {self.source_path} does not exist.")
                 raise FileNotFoundError(f"Source path {self.source_path} does not exist.")
 
