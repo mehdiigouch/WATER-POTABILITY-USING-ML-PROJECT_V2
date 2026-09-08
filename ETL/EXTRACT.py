@@ -1,7 +1,10 @@
 
 import pandas as pd
 from pathlib import Path
+from INSPECTATION import Inspection
 
+
+#Path.cwd().parent  /"DATASET"/"water_potability.csv"
 
 
 class Extraction:
@@ -27,5 +30,11 @@ class Extraction:
 
 
 
+DATA=Path.cwd().parent  /"DATASET"/"water_potability.csv"
+
+
+df = Extraction(DATA).extract_data()
+
+Inspection(df).inspect_data()
 
 
