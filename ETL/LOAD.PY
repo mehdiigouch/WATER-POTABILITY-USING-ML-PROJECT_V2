@@ -12,3 +12,4 @@ class Load:
         print(
             f"[OK] Data successfully loaded to {self.output_path}"
         )
+
