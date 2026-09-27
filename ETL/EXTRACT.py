@@ -1,33 +1,42 @@
-
-import pandas as pd
 from pathlib import Path
 
+import pandas as pd
 
 
-#Path.cwd().parent  /"DATASET"/"water_potability.csv"
+class EXTRACTION:
+    """Extract data from a CSV source."""
 
+    def __init__(
+        self,
+        source_path: str | Path,
+        encoding: str = "utf-8"
+    ):
+        self.source_path = Path(source_path)
+        self.encoding = encoding
 
-class Extraction:
-    def __init__(self, source_path):
-        self.source_path = source_path
+    def run(self) -> pd.DataFrame:
+        """Read the CSV source and return a DataFrame."""
 
-    def extract_data(self) -> pd.DataFrame:
-        
+        if not self.source_path.is_file():
+            raise FileNotFoundError(
+                f"Source file does not exist: {self.source_path}"
+            )
+
         try:
-            # Check if the source path exists
-            if not Path(self.source_path).exists():
-                
-                raise FileNotFoundError(f"Source path {self.source_path} does not exist.")
+            data = pd.read_csv(
+                self.source_path,
+                encoding=self.encoding
+            )
 
-            # Read the data into a DataFrame
-            data = pd.read_csv(self.source_path)
-            
             return data
 
-        except Exception as e:
-            
-            raise
+        except pd.errors.ParserError as exc:
+            raise ValueError(
+                f"Unable to parse CSV file: {self.source_path}"
+            ) from exc
 
-
-
-
+        except UnicodeDecodeError as exc:
+            raise ValueError(
+                f"Unable to decode file '{self.source_path}' "
+                f"using encoding '{self.encoding}'."
+            ) from exc
