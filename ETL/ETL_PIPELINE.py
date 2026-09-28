@@ -6,6 +6,8 @@ import pandas as pd
 from EXTRACT import EXTRACTION
 from TRANSFORMATION import TRANSFORMATION
 from LOAD import LOAD
+from VALIDATION import Validation
+from INSPECTATION import  Inspection
 
 
 class ETL:
@@ -18,14 +20,19 @@ class ETL:
         output_path: str | Path | None = None
     ) -> pd.DataFrame:
 
-        # 1. Extract
+        # 1. Extract & validation
         raw_df = EXTRACTION(source_path).run()
 
-        # 2. Transform
+        Validation(raw_df).run()
+
+
+        # 2. Transform & inspection
         transformed_df = (
             TRANSFORMATION(raw_df)
             .run()
         )
+
+        Inspection(transformed_df).inspect_data()
 
         # 3. Load only if an output path was provided
         if output_path is not None:

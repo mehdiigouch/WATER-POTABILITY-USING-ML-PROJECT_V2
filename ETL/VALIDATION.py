@@ -61,7 +61,7 @@ class Validation:
                     f"got {actual_dtype}"
                 )
 
-    def validate(self) -> None:
+    def run(self) -> None:
 
         self.validate_columns()
         print("[OK] Column validation passed.")
