@@ -3,18 +3,18 @@ from pathlib import Path
 
 import pandas as pd
 
-from EXTRACT import EXTRACTION
-from TRANSFORMATION import TRANSFORMATION
-from LOAD import LOAD
-from VALIDATION import Validation
-from INSPECTATION import  Inspection
+from .EXTRACT import EXTRACTION
+from .TRANSFORMATION import TRANSFORMATION
+from .LOAD import LOAD
+from .VALIDATION import Validation
+from .INSPECTATION import  Inspection
 
 
 class ETL:
     
 
     @classmethod
-    def pipeline(
+    def run(
         cls,
         source_path: str | Path,
         output_path: str | Path | None = None
