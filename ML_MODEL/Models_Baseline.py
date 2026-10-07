@@ -1,7 +1,7 @@
 from pathlib import Path
 import sys
 
-PROJECT_ROOT = Path.cwd().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.append(str(PROJECT_ROOT))
 
 
@@ -14,6 +14,10 @@ from UTILS.data_path import get_data_path
 
 
 path = get_data_path()
+
+print(path)
+
+
 
 data = ETL.run(path)
 
