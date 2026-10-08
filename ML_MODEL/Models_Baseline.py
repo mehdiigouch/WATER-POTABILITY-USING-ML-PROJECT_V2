@@ -8,12 +8,10 @@ sys.path.append(str(PROJECT_ROOT))
 from ETL.ETL_PIPELINE import  ETL
 from PROCESSING.DATA_PROCESSING import DataProcessor
 
-from UTILS.data_path import get_data_path
+from UTILS.data_path import Direction
 
 
-
-
-path = get_data_path()
+path =Direction().get_data_path()
 
 print(path)
 

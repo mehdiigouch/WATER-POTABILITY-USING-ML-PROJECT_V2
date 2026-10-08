@@ -6,9 +6,25 @@ sys.path.append(str(PROJECT_ROOT))
 import pandas as pd
 
 
-def get_data_path():
-    """
-    Returns the path to the data directory.
-    """
-    return Path.cwd().parent /"DATASET"/"water_potability.csv"
-    
+
+
+
+class Direction : 
+
+        def __init__(self):
+            self.path = Path.cwd().parent /"DATASET"/"water_potability.csv"
+
+
+        def get_data_path(self):
+            """
+            Returns the path to the data directory.
+            """
+            return self.path
+
+
+        def path_for_notebooks(self):
+            """
+            Returns the path to the data directory for notebooks.
+            """
+            self.path = Path.cwd().parent.parent / "DATASET"/"water_potability.csv"
+            return self.path
