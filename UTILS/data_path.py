@@ -10,5 +10,5 @@ def get_data_path():
     """
     Returns the path to the data directory.
     """
-    path = Path.cwd().parent.parent  /"DATASET"/"water_potability.csv"
-    return path
+    return Path.cwd().parent /"DATASET"/"water_potability.csv"
+    
