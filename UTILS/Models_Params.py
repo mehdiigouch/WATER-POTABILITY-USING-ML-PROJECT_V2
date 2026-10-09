@@ -756,8 +756,7 @@ class Models_Parameters :
                   ],
 
                   # Automatic class weighting
-                  "auto_class_weights": [
-                      None,
+                  "auto_class_weights": [                
                       "Balanced",
                       "SqrtBalanced"
                   ]

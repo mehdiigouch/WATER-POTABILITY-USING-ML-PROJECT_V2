@@ -27,9 +27,14 @@ from sklearn.metrics import (
 
 class BaseLine_Models: 
 
-    def __init__(self, models,df):
-        self.models = models
-        self.data = df
+    def __init__(self, models_dict,x_train ,x_test,y_train,y_test):
+        self.model_dict = models_dict
+        self.x_train = x_train
+        self.x_test = x_test
+        self.y_train = y_train
+        self.y_test = y_test
+        
+
 
 
 
@@ -82,32 +87,28 @@ class BaseLine_Models:
 
         metrics = []
         
-        processor = DataProcessor(self.data)
-        
-        X_train, X_test, y_train, y_test = processor.process()
-        
-        for model_name, model in self.models.items():
+        for model_name, model in self.model_dict.items():
         
                 print(f"Training {model_name}...")
         
-                model.fit(X_train, y_train)
+                model.fit(self.x_train, self.y_train)
         
-                y_predict = model.predict(X_test)
+                y_predict = model.predict(self.x_test)
         
                 if model_name == "SVM":
                     y_score = None
         
                 else:
-                    y_score = model.predict_proba(X_test)[:, 1]
+                    y_score = model.predict_proba(self.x_test)[:, 1]
         
-                m = self.simple_test(
-                    y_test,
+                measures = self.simple_test(
+                    self.y_test,
                     y_predict,
                     y_score,
                     model_name
                    )
         
-                metrics.append(m)
+                metrics.append(measures)
         
         return pd.DataFrame(metrics)
     
